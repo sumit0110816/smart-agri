@@ -6,6 +6,7 @@ import VoiceAssistant from './components/VoiceAssistant';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import DriverDashboard from './pages/DriverDashboard';
 import PricePrediction from './pages/PricePrediction';
 import DemandForecast from './pages/DemandForecast';
 import MarketLocator from './pages/MarketLocator';
@@ -13,6 +14,7 @@ import CropRecommendation from './pages/CropRecommendation';
 import StorageAdvice from './pages/StorageAdvice';
 import NewsPage from './pages/NewsPage';
 import YojanaPage from './pages/YojanaPage';
+import TransportRequest from './pages/TransportRequest';
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated, loading } = useAuth();
@@ -40,17 +42,29 @@ function AppLayout({ children }) {
 }
 
 function AppRoutes() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
+  const isDriver = user?.role === 'Driver';
+  const homeRoute = isDriver ? '/driver-dashboard' : '/dashboard';
 
   return (
     <Routes>
-      <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />} />
-      <Route path="/signup" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Signup />} />
+      <Route path="/login" element={isAuthenticated ? <Navigate to={homeRoute} replace /> : <Login />} />
+      <Route path="/signup" element={isAuthenticated ? <Navigate to={homeRoute} replace /> : <Signup />} />
+
+      {/* Farmer Dashboard */}
       <Route path="/dashboard" element={
         <ProtectedRoute>
           <AppLayout><Dashboard /></AppLayout>
         </ProtectedRoute>
       } />
+
+      {/* Driver Dashboard */}
+      <Route path="/driver-dashboard" element={
+        <ProtectedRoute>
+          <AppLayout><DriverDashboard /></AppLayout>
+        </ProtectedRoute>
+      } />
+
       <Route path="/price-prediction" element={
         <ProtectedRoute>
           <AppLayout><PricePrediction /></AppLayout>
@@ -86,7 +100,12 @@ function AppRoutes() {
           <AppLayout><YojanaPage /></AppLayout>
         </ProtectedRoute>
       } />
-      <Route path="*" element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />} />
+      <Route path="/transport" element={
+        <ProtectedRoute>
+          <AppLayout><TransportRequest /></AppLayout>
+        </ProtectedRoute>
+      } />
+      <Route path="*" element={<Navigate to={isAuthenticated ? homeRoute : '/login'} replace />} />
     </Routes>
   );
 }

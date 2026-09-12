@@ -39,6 +39,16 @@ export function AuthProvider({ children }) {
     return res.data;
   };
 
+  const googleLogin = async (credential, role) => {
+    const res = await authAPI.googleLogin(credential, role);
+    const { token: newToken, user: userData } = res.data;
+    setToken(newToken);
+    setUser(userData);
+    localStorage.setItem('agri_token', newToken);
+    localStorage.setItem('agri_user', JSON.stringify(userData));
+    return res.data;
+  };
+
   const logout = () => {
     setToken(null);
     setUser(null);
@@ -47,7 +57,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, loading, login, signup, logout, isAuthenticated: !!token }}>
+    <AuthContext.Provider value={{ user, token, loading, login, signup, googleLogin, logout, isAuthenticated: !!token }}>
       {children}
     </AuthContext.Provider>
   );

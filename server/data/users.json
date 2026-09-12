@@ -5,5 +5,34 @@
     "email": "demo@agrismart.com",
     "password": "$2a$10$4h4p4G0pIX267dtre/Qd7.KgmgzJBhBFTTUzvKxoYuhfmZet7n5aS",
     "createdAt": "2026-04-02T10:25:46.712Z"
+  },
+  {
+    "id": "a2ea4ea1-b78e-42f1-8fa6-8cf8cfa45f69",
+    "name": "Sumit Margankop",
+    "email": "sumeetmargankop@gmail.com",
+    "role": "Farmer",
+    "googleId": "104712561579615088810",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIMOXKEt4f65neY---M3jtHWRlFhueIlaUuNApIaWt7cd0Hhjes=s96-c",
+    "createdAt": "2026-09-08T07:07:07.309Z",
+    "password": "$2a$10$Q.tX0DPu5bWVh9JwZ0O/Zekoe7Uv6GlKz69XHBWNw6cVQOgCNjAne"
+  },
+  {
+    "id": "30431705-d361-4a2a-9e47-c3b87adfa945",
+    "name": "suu",
+    "email": "margankopsumit@gmail.com",
+    "password": "$2a$10$zc0JOAHRp6JDyYjQR5kPkO1b5m1M/l0vzvBOgqGyQU7frM0qmD1Aa",
+    "role": "Driver",
+    "createdAt": "2026-09-08T07:23:43.695Z",
+    "googleId": "104043611950753317050",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocKhfdidfT6gXlWM-UH_z5jPDAyV1Rh-OGCt9v0TPkWt_pnweQ=s96-c"
+  },
+  {
+    "id": "68222262-5bf5-436d-b7bc-fdf6a0ba7e43",
+    "name": "Pavan Margankop",
+    "email": "amitmargankop@gmail.com",
+    "role": "Farmer",
+    "googleId": "111026691629264394363",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocL22HpgZMGMPHPoQLQuYIXlJh89L0K_zNcJCeHQi-x9XFp4Jg=s96-c",
+    "createdAt": "2026-09-12T12:06:04.584Z"
   }
 ]

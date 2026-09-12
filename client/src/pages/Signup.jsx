@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import GoogleLoginButton from '../components/GoogleLoginButton';
 import './Auth.css';
 
 export default function Signup() {
@@ -59,6 +60,43 @@ export default function Signup() {
             </div>
           )}
 
+          <div className="form-group" style={{ marginBottom: '1rem' }}>
+            <label className="form-label">I am registering as a...</label>
+            <div className="role-selector" style={{ display: 'flex', gap: '15px', marginTop: '6px' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.9rem' }}>
+                <input 
+                  type="radio" 
+                  name="role" 
+                  value="Farmer" 
+                  checked={role === 'Farmer'} 
+                  onChange={e => setRole(e.target.value)} 
+                />
+                🧑‍🌾 Farmer
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.9rem' }}>
+                <input 
+                  type="radio" 
+                  name="role" 
+                  value="Driver" 
+                  checked={role === 'Driver'} 
+                  onChange={e => setRole(e.target.value)} 
+                />
+                🚛 Transport Partner
+              </label>
+            </div>
+          </div>
+
+          {/* Google Sign Up */}
+          <GoogleLoginButton 
+            role={role}
+            text="signup_with" 
+            onError={(msg) => setError(msg)}
+          />
+
+          <div className="auth-divider">
+            <span>or sign up with email</span>
+          </div>
+
           <div className="form-group">
             <label className="form-label" htmlFor="name">Full Name</label>
             <input
@@ -109,32 +147,6 @@ export default function Signup() {
               onChange={e => setConfirmPassword(e.target.value)}
               required
             />
-          </div>
-
-          <div className="form-group">
-            <label className="form-label">I am a...</label>
-            <div className="role-selector" style={{ display: 'flex', gap: '15px', marginTop: '10px' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                <input 
-                  type="radio" 
-                  name="role" 
-                  value="Farmer" 
-                  checked={role === 'Farmer'} 
-                  onChange={e => setRole(e.target.value)} 
-                />
-                🧑‍🌾 Farmer
-              </label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                <input 
-                  type="radio" 
-                  name="role" 
-                  value="Driver" 
-                  checked={role === 'Driver'} 
-                  onChange={e => setRole(e.target.value)} 
-                />
-                🚛 Transport Partner
-              </label>
-            </div>
           </div>
 
           <button type="submit" className="btn btn-primary btn-block btn-lg" disabled={loading}>

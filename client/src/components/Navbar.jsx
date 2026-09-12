@@ -15,16 +15,27 @@ export default function Navbar() {
     navigate('/login');
   };
 
-  const navLinks = [
-    { to: '/dashboard', icon: 'dashboard', label: t('dashboard') },
-    { to: '/price-prediction', icon: 'analytics', label: t('pricePrediction') },
-    { to: '/demand-forecast', icon: 'weather', label: t('demandForecast') },
-    { to: '/market-locator', icon: 'settings', label: t('marketLocator') },
-    { to: '/crop-recommendation', icon: 'crops', label: t('cropAdvisor') },
-    { to: '/storage-advice', icon: 'soil', label: t('storageAdvice') },
-    { to: '/news', icon: 'news', label: t('news') },
-    { to: '/yojana', icon: 'yojana', label: t('yojana') },
-  ];
+  const isDriver = user?.role === 'Driver';
+  const dashboardLink = isDriver ? '/driver-dashboard' : '/dashboard';
+
+  const navLinks = isDriver
+    ? [
+        { to: dashboardLink, icon: 'dashboard', label: '🚛 Transport Hub' },
+        { to: '/market-locator', icon: 'settings', label: t('marketLocator') },
+        { to: '/news', icon: 'news', label: t('news') },
+        { to: '/yojana', icon: 'yojana', label: t('yojana') },
+      ]
+    : [
+        { to: dashboardLink, icon: 'dashboard', label: t('dashboard') },
+        { to: '/price-prediction', icon: 'analytics', label: t('pricePrediction') },
+        { to: '/demand-forecast', icon: 'weather', label: t('demandForecast') },
+        { to: '/market-locator', icon: 'settings', label: t('marketLocator') },
+        { to: '/crop-recommendation', icon: 'crops', label: t('cropAdvisor') },
+        { to: '/storage-advice', icon: 'soil', label: t('storageAdvice') },
+        { to: '/transport', icon: 'dashboard', label: '🚛 Hire Transport' },
+        { to: '/news', icon: 'news', label: t('news') },
+        { to: '/yojana', icon: 'yojana', label: t('yojana') },
+      ];
 
   const getNavIcon = (iconName) => {
     switch (iconName) {
@@ -116,7 +127,11 @@ export default function Navbar() {
           AgriSmart
         </span>
         {isAuthenticated && (
-          <div className="mobile-avatar">{user?.name?.charAt(0) || 'U'}</div>
+          user?.picture ? (
+            <img src={user.picture} alt={user.name} className="mobile-avatar" style={{ objectFit: 'cover', padding: 0 }} referrerPolicy="no-referrer" />
+          ) : (
+            <div className="mobile-avatar">{user?.name?.charAt(0)?.toUpperCase() || 'U'}</div>
+          )
         )}
       </div>
 
@@ -163,17 +178,36 @@ export default function Navbar() {
             </select>
           </div>
 
-          <button className="new-analysis-btn" onClick={() => navigate('/crop-recommendation')}>
+          <button className="new-analysis-btn" onClick={() => navigate(isDriver ? '/driver-dashboard' : '/crop-recommendation')}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <circle cx="12" cy="12" r="10"/>
               <path d="M12 8v8"/>
               <path d="M8 12h8"/>
             </svg>
-            {t('newAnalysis')}
+            {isDriver ? '🚛 My Jobs' : t('newAnalysis')}
           </button>
 
           {isAuthenticated && (
             <div className="sidebar-footer">
+              <div className="user-profile-badge" style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 12px', marginBottom: '10px', background: 'rgba(0,0,0,0.03)', borderRadius: 'var(--radius-md)' }}>
+                {user?.picture ? (
+                  <img 
+                    src={user.picture} 
+                    alt={user.name} 
+                    style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} 
+                    referrerPolicy="no-referrer" 
+                  />
+                ) : (
+                  <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--color-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '0.9rem' }}>
+                    {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+                  </div>
+                )}
+                <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis' }}>{user?.name || 'User'}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{user?.role || 'Farmer'}</div>
+                </div>
+              </div>
+
               <button className="support-link" onClick={handleLogout}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />

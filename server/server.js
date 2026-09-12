@@ -6,12 +6,24 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// --- Middleware ---
+// --- Security & Middleware ---
+app.disable('x-powered-by');
+
+// Basic Security Headers Middleware
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
 app.use(cors({
   origin: ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:4173'],
   credentials: true
 }));
-app.use(express.json());
+
+app.use(express.json({ limit: '100kb' }));
 
 // --- Request Logger (dev) ---
 app.use((req, res, next) => {
@@ -27,6 +39,7 @@ app.use('/api/market', require('./routes/market'));
 app.use('/api/crop', require('./routes/crop'));
 app.use('/api/storage', require('./routes/storage'));
 app.use('/api/retailer', require('./routes/retailer'));
+app.use('/api/trips', require('./routes/trips'));
 app.use('/api/news', require('./routes/news'));
 app.use('/api/yojana', require('./routes/yojana'));
 app.use('/api/weather', require('./routes/weather'));

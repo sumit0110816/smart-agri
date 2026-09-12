@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import GoogleLoginButton from '../components/GoogleLoginButton';
 import './Auth.css';
 
 export default function Login() {
@@ -25,27 +26,6 @@ export default function Login() {
     }
   };
 
-  // Demo login
-  const handleDemoLogin = async () => {
-    setError('');
-    setLoading(true);
-    try {
-      // First create demo account if it doesn't exist
-      try {
-        const { authAPI } = await import('../utils/api');
-        await authAPI.signup('Demo Farmer', 'demo@agrismart.com', 'demo123');
-      } catch (e) {
-        // Account may already exist, that's fine
-      }
-      await login('demo@agrismart.com', 'demo123');
-      navigate('/dashboard');
-    } catch (err) {
-      setError(err.response?.data?.error || 'Failed to login with demo account');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="auth-page">
       <div className="auth-container">
@@ -65,6 +45,16 @@ export default function Login() {
               <span>{error}</span>
             </div>
           )}
+
+          {/* Google Sign In */}
+          <GoogleLoginButton 
+            text="signin_with" 
+            onError={(msg) => setError(msg)}
+          />
+
+          <div className="auth-divider">
+            <span>or sign in with email</span>
+          </div>
 
           <div className="form-group">
             <label className="form-label" htmlFor="email">Email Address</label>
@@ -96,14 +86,6 @@ export default function Login() {
 
           <button type="submit" className="btn btn-primary btn-block btn-lg" disabled={loading}>
             {loading ? '⏳ Signing in...' : '🔓 Sign In'}
-          </button>
-
-          <div className="auth-divider">
-            <span>or</span>
-          </div>
-
-          <button type="button" className="btn btn-secondary btn-block" onClick={handleDemoLogin} disabled={loading}>
-            🚀 Try Demo Account
           </button>
 
           <p className="auth-switch">

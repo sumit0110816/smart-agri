@@ -1,0 +1,1009 @@
+/* ==========================================
+   DRIVER DASHBOARD
+   ========================================== */
+
+.driver-dashboard {
+  padding: 0;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── TOP BAR ─────────────────────────────── */
+.dd-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) 0;
+  margin-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dd-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.dd-truck-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.dd-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.dd-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin: 2px 0 0;
+}
+
+.dd-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.dd-status-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(74, 122, 46, 0.1);
+  border: 1px solid rgba(74, 122, 46, 0.3);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.dd-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4a7a2e;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+
+.dd-status-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4a7a2e;
+}
+
+.dd-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--text-secondary);
+}
+
+.dd-icon-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--bg-accent);
+}
+
+/* ── STATS ROW ───────────────────────────── */
+.dd-stats-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.dd-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.dd-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.dd-stat-icon {
+  font-size: 1.6rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.dd-stat-green .dd-stat-icon { background: rgba(74, 122, 46, 0.12); color: #4a7a2e; }
+.dd-stat-blue .dd-stat-icon { background: rgba(59, 126, 161, 0.12); }
+.dd-stat-amber .dd-stat-icon { background: rgba(201, 168, 76, 0.12); }
+.dd-stat-purple .dd-stat-icon { background: rgba(107, 91, 149, 0.12); }
+.dd-stat-teal .dd-stat-icon { background: rgba(45, 150, 130, 0.12); }
+
+.dd-stat-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  line-height: 1.2;
+}
+
+.dd-stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ── MAIN GRID ───────────────────────────── */
+.dd-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+/* ── TABS ────────────────────────────────── */
+.dd-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-input);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin-bottom: var(--space-md);
+}
+
+.dd-tab {
+  flex: 1;
+  padding: 0.55rem 1rem;
+  border-radius: calc(var(--radius-md) - 2px);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.dd-tab:hover {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.dd-tab-active {
+  background: var(--bg-card);
+  color: var(--color-primary);
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.dd-badge {
+  background: #c44536;
+  color: white;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.dd-badge-green {
+  background: #4a7a2e;
+}
+
+/* ── CARD LIST ───────────────────────────── */
+.dd-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ── EMPTY STATE ─────────────────────────── */
+.dd-empty {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+}
+
+.dd-empty p {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.dd-empty-sub {
+  font-size: 0.85rem !important;
+  color: var(--text-muted) !important;
+  font-weight: 400 !important;
+}
+
+/* ── TRIP CARD ───────────────────────────── */
+.dd-trip-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem 1.4rem;
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.dd-trip-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  transform: translateY(-1px);
+}
+
+.dd-trip-urgent {
+  border-left: 4px solid #c44536;
+}
+
+.dd-active-card {
+  border-left: 4px solid #c9a84c;
+}
+
+.dd-trip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.dd-trip-crop {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.dd-trip-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dd-urgency-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(196, 69, 54, 0.1);
+  color: #c44536;
+  border: 1px solid rgba(196, 69, 54, 0.2);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.dd-status-pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+
+.dd-status-pill.pending { background: rgba(59, 126, 161, 0.12); color: #3b7ea1; }
+.dd-status-pill.accepted { background: rgba(74, 122, 46, 0.12); color: #4a7a2e; }
+.dd-status-pill.in-transit { background: rgba(201, 168, 76, 0.12); color: #b8952e; }
+
+.dd-trip-farmer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* ── ROUTE DISPLAY ───────────────────────── */
+.dd-trip-route {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-input);
+  border-radius: var(--radius-md);
+}
+
+.dd-route-point {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dd-route-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dd-route-dot.pickup { background: #4a7a2e; }
+.dd-route-dot.drop { background: #c44536; }
+
+.dd-route-line {
+  width: 1.5px;
+  height: 18px;
+  background: var(--border-color);
+  margin-left: 4.25px;
+}
+
+.dd-route-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+.dd-route-place {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── META CHIPS ──────────────────────────── */
+.dd-trip-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+
+.dd-meta-chip {
+  font-size: 0.78rem;
+  padding: 3px 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.dd-meta-chip.dd-payment {
+  background: rgba(74, 122, 46, 0.1);
+  border-color: rgba(74, 122, 46, 0.2);
+  color: #4a7a2e;
+  font-weight: 700;
+}
+
+/* ── ACTIONS ─────────────────────────────── */
+.dd-trip-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.dd-btn-accept {
+  flex: 1;
+  padding: 0.6rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.dd-btn-accept:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.dd-btn-decline {
+  padding: 0.6rem 1.1rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dd-btn-decline:hover {
+  border-color: #c44536;
+  color: #c44536;
+}
+
+.dd-accepted-notice {
+  background: rgba(74, 122, 46, 0.1);
+  border: 1px solid rgba(74, 122, 46, 0.2);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  color: #4a7a2e;
+  font-weight: 500;
+}
+
+.dd-btn-complete {
+  width: 100%;
+  padding: 0.65rem;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #b8952e;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dd-btn-complete:hover {
+  background: rgba(201, 168, 76, 0.2);
+}
+
+/* ── PROGRESS BAR ────────────────────────── */
+.dd-progress-section {
+  margin-bottom: 1rem;
+}
+
+.dd-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.dd-progress-bar {
+  height: 8px;
+  background: var(--bg-input);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.dd-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4a7a2e, #c9a84c);
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+/* ── EARNINGS ────────────────────────────── */
+.dd-earnings-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.dd-earnings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.dd-earnings-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.dd-earnings-featured {
+  background: linear-gradient(135deg, rgba(74, 122, 46, 0.08), rgba(45, 80, 22, 0.04));
+  border-color: rgba(74, 122, 46, 0.25);
+}
+
+.dd-earnings-period {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+}
+
+.dd-earnings-amount {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  font-family: var(--font-display);
+}
+
+.dd-earnings-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.dd-perf-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem 1.4rem;
+}
+
+.dd-perf-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin: 0 0 1rem;
+}
+
+.dd-perf-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.dd-perf-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dd-perf-label {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.dd-perf-stars {
+  color: #c9a84c;
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.dd-perf-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dd-perf-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.dd-perf-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-input);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.dd-perf-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4a7a2e, #7ab648);
+  border-radius: 999px;
+}
+
+.dd-recent-trips {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem 1.4rem;
+}
+
+.dd-recent-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dd-recent-item:last-child { border-bottom: none; }
+
+.dd-recent-crop { font-size: 1.2rem; flex-shrink: 0; }
+
+.dd-recent-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dd-recent-route {
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.dd-recent-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.dd-recent-earned {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #4a7a2e;
+}
+
+/* ── RIGHT COLUMN ────────────────────────── */
+.dd-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ── WEATHER CARD ────────────────────────── */
+.dd-weather-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem;
+}
+
+.dd-weather-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 0.9rem;
+}
+
+.dd-weather-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.dd-live-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #4a7a2e;
+}
+
+.dd-weather-loading {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.dd-weather-body {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.dd-weather-emoji { font-size: 2.5rem; }
+
+.dd-weather-temp {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  font-family: var(--font-display);
+}
+
+.dd-weather-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.dd-weather-stats {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: 0.7rem;
+}
+
+.dd-weather-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg-input);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  gap: 2px;
+}
+
+.dd-weather-stat strong {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.dd-weather-alert {
+  background: rgba(59, 126, 161, 0.1);
+  border: 1px solid rgba(59, 126, 161, 0.2);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  color: #3b7ea1;
+  font-weight: 500;
+}
+
+/* ── MARKETS CARD ────────────────────────── */
+.dd-markets-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem;
+}
+
+.dd-markets-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 0.9rem;
+}
+
+.dd-markets-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.dd-markets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.dd-market-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dd-market-item:last-child { border-bottom: none; }
+.dd-market-closed { opacity: 0.6; }
+
+.dd-market-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dd-market-info { flex: 1; display: flex; flex-direction: column; }
+
+.dd-market-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.dd-market-crops {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+}
+
+.dd-market-right { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+
+.dd-market-distance {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.dd-market-status {
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+.dd-market-status.open { background: rgba(74, 122, 46, 0.12); color: #4a7a2e; }
+.dd-market-status.closed { background: rgba(150, 150, 150, 0.12); color: #888; }
+
+.dd-find-more-btn {
+  width: 100%;
+  padding: 0.55rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dd-find-more-btn:hover {
+  background: var(--bg-accent);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ── TIPS CARD ───────────────────────────── */
+.dd-tips-card {
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.08), rgba(184, 149, 46, 0.04));
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem;
+}
+
+.dd-tips-header {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #b8952e;
+  margin-bottom: 0.8rem;
+}
+
+.dd-tips-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.dd-tips-list li {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── TOAST ───────────────────────────────── */
+.dd-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 9999;
+  animation: slideUp 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.dd-toast-success { background: #4a7a2e; color: white; }
+.dd-toast-info { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); }
+.dd-toast-error { background: #c44536; color: white; }
+
+/* ── ERROR BANNER ────────────────────────── */
+.dd-error-banner {
+  background: rgba(196, 69, 54, 0.1);
+  border: 1px solid rgba(196, 69, 54, 0.2);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-size: 0.87rem;
+  color: #c44536;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.dd-error-banner button {
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-md);
+  color: inherit;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+/* ── LOADING STATE ───────────────────────── */
+.dd-loading-state {
+  text-align: center;
+  padding: 2.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ── TRIP NOTES ──────────────────────────── */
+.dd-trip-notes {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--bg-input);
+  border-radius: var(--radius-md);
+  padding: 0.45rem 0.75rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border-color);
+}
+
+/* ── ACTIVE ACTIONS ──────────────────────── */
+.dd-active-actions {
+  margin-top: 0.25rem;
+}
+
+.dd-btn-transit {
+  width: 100%;
+  padding: 0.65rem;
+  background: rgba(107, 91, 149, 0.1);
+  border: 1px solid rgba(107, 91, 149, 0.3);
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #6b5b95;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dd-btn-transit:hover { background: rgba(107, 91, 149, 0.2); }
+
+/* ── AMBER BADGE ─────────────────────────── */
+.dd-badge-amber { background: #b8952e; }
+
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media (max-width: 1100px) {
+  .dd-stats-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .dd-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dd-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .dd-tips-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .dd-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dd-right {
+    grid-template-columns: 1fr;
+  }
+
+  .dd-topbar {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .dd-earnings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dd-tabs {
+    flex-wrap: wrap;
+  }
+}

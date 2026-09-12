@@ -1,0 +1,4 @@
+{
+  "watch": ["server.js", "routes", "middleware", "utils"],
+  "ignore": ["data/*", "test_*", "*.log"]
+}

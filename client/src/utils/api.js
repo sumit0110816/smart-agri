@@ -36,7 +36,24 @@ api.interceptors.response.use(
 export const authAPI = {
   login: (email, password) => api.post('/auth/login', { email, password }),
   signup: (name, email, password, role) => api.post('/auth/signup', { name, email, password, role }),
+  googleLogin: (credential, role) => api.post('/auth/google', { credential, role }),
   getProfile: () => api.get('/auth/me')
+};
+
+// --- Trips APIs (Farmer ↔ Driver) ---
+export const tripsAPI = {
+  // Farmer: create a transport request
+  create: (data) => api.post('/trips', data),
+  // Farmer: get own posted trips
+  mine: () => api.get('/trips/mine'),
+  // Driver: get all pending trips from farmers
+  available: () => api.get('/trips/available'),
+  // Driver: accept a trip
+  accept: (id) => api.put(`/trips/${id}/accept`),
+  // Driver or Farmer: update trip status
+  updateStatus: (id, status) => api.put(`/trips/${id}/status`, { status }),
+  // Farmer: delete a pending trip
+  delete: (id) => api.delete(`/trips/${id}`)
 };
 
 // --- Price APIs ---
